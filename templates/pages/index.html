@@ -1,0 +1,174 @@
+{% load static %} {% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="https://img.freepik.com/free-vector/letter-w-with-blossoms_53876-66550.jpg">
+    <title>WHOOPS</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="{% static "js/js.js" %}"></script>
+    <style>
+        .shopping1 {
+            background-image: url({%static 'img/img1.jpg' %});
+            width: 100%;
+            min-height: 100vh;
+            opacity: 0.7;
+            background: rgba(rgb(228, 198, 198), rgb(187, 209, 187), rgb(160, 160, 189), 0.5);
+            background-size: contain;
+        }
+        
+        @media(max-width:982px) {
+            .shopping1 {
+                background-size: cover;
+            }
+        }
+        
+        .shopping1:hover {
+            background-image: url({% static 'img/img2.jpg' %});
+            width: 100%;
+            min-height: 100vh;
+            opacity: 0.7;
+            background: rgba(rgb(228, 198, 198), rgb(187, 209, 187), rgb(160, 160, 189), 0.5);
+            background-size: cover;
+        }
+        
+        .shopping1:hover .collections {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body style="overflow-x: hidden;">
+    <header>
+        <h1>
+            <img src="{% static 'img/whoops 3d .png' %}" alt="">
+        </h1>
+        <nav>
+            <span><a href="{% url '#home' %}">HOME</a></span>
+            <a href="#Hoodies">Hoodies</a> {% comment %} <a href="{% url '#delivery' %}">Delivery</a> {% endcomment %}
+            <a href="{% url '#returns' %}">Returns & Exchange</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="icons">
+            <!-- <a href=""><i class="fa-solid fa-magnifying-glass"></i></a> -->
+            <a href="{% url 'cart'%}"><i class="fa-solid fa-cart-shopping"></i></a>
+            <li onclick=showSidebar()><i class="fa-solid fa-bars"></i></li>
+            <li class="closesidebar" onclick=hideSidebar()><i class="fa-solid fa-xmark"></i></li>
+        </div>
+    </header>
+
+    <section class="shopping" id="home">
+        <div class="navigation">
+            <ul>
+                <li><a href="{% url '#home' %}" style=padding-right:7px> HOME</a> </li>
+                <li><a href="#Hoodies">Hoodies</a></li>
+                {% comment %}
+                <li><a href="{% url '#delivery' %}">Delivery</a></li> {% endcomment %}
+                <li><a href="{% url '#returns' %}">Returns & Exchange</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="shopping1">
+            <a href="#Hoodies" class="collections" style="text-decoration: none;">collections</a>
+        </div>
+        <a class="shopp" href="#Hoodies">shop</a>
+        <p>choose yours now</p>
+    </section>
+    <section class="hoodies " id="Hoodies">
+
+        <div class="items ">
+            {% for x in pro %}
+            <div class="item-container">
+                <div class="item ">
+                    <img class="img1" src="{{x.image1.url}}" alt=" ">
+                    <img class="img2" src="{{x.image2.url}}" alt="">
+                </div>
+                <div class="content">
+                    <p class="hoodie">{{x.description}}</p> 
+                    <p class="price">price: {{x.price}}</p>
+
+                    <button class='addingcart' style="font-size: larger; font-family:auto;" onclick="passValue()"><a href="{% url 'cart'%}" style="text-decoration: none;
+                        color: white;" class='adding' id="add-to-cart-btn">add to cart</a></button>
+                </div>
+            </div>
+            {% endfor %} {% comment %}
+            <div class="item-container">
+                <div class="item ">
+                    <img class="img1" src="{{y.image1.url}}" alt=" ">
+                    <img class="img2" src="{{y.image2.url}}" alt="">
+                </div>
+                <div class="content">
+                    <p class="hoodie">{{y.description}}</p>
+                    <p class="price">price: {{y.price}}</p>
+                </div>
+            </div>
+            <div class="item-container">
+                <div class="item ">
+                    <img class="img1" src="{{z.image1.url}}" alt=" ">
+                    <img class="img2" src="{{z.image2.url}}" alt="">
+                </div>
+                <div class="content">
+                    <p class="hoodie">{{z.description}}</p>
+                    <p class="price">price: {{z.price}}</p>
+                </div>
+            </div>
+            <div class="item-container">
+                <div class="item ">
+                    <img class="img1" src="{{a.image1.url}}" alt=" ">
+                    <img class="img2" src="{{a.image2.url}}" alt="">
+                </div>
+                <div class="content">
+                    <p class="hoodie">{{a.description}}</p>
+                    <p class="price">price: {{a.price}}</p>
+                </div>
+            </div> {% endcomment %}
+        </div>
+    </section>
+    <section class="contact" id="contact">
+        <div class="contentt">
+            <h1><img src="{% static 'img/whoops 2.png' %}" alt=""></h1>
+            <div class="cards">
+                <div class="card-contact">
+                    <i class="fa-solid fa-phone"></i>
+                    <h5>phone</h5>
+                    <p>01021383686</p>
+                </div>
+                <div class="card-contact">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h5>mail</h5>
+                    <p>omar01021383686@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>happy to see you <span>see you again </span></p>
+        <p>contact us</p>
+        <div class="icons">
+            <i><i class="fa-brands fa-instagram"></i></i>
+            <i><i class="fa-brands fa-facebook"></i></i>
+            <i><i class="fa-brands fa-twitter"></i></i>
+        </div>
+    </footer>
+    <script>
+        function showSidebar() {
+            const navigation = document.querySelector('.navigation')
+            navigation.style.display = 'block'
+            const closesidebar = document.querySelector('.closesidebar')
+            closesidebar.style.display = 'flex'
+        }
+
+        function hideSidebar() {
+            const navigation = document.querySelector('.navigation')
+            navigation.style.display = 'none'
+            const closesidebar = document.querySelector('.closesidebar')
+            closesidebar.style.display = 'none'
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="https://img.freepik.com/free-vector/letter-w-with-blossoms_53876-66550.jpg">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/js.js' %}"></script>
+
+    <title>WHOOPS</title>
+    <style>
+        .delivery {
+            background-image: url({% static 'img/img1.jpg' %});
+            width: 100%;
+            min-height: 92vh;
+            /* opacity: 0.7; */
+            background: rgba(rgb(228, 198, 198), rgb(187, 209, 187), rgb(160, 160, 189), 0.5);
+            background-size: contain;
+            position: fixed;
+            top: 86px;
+            background-color: black;
+        }
+        
+        @media(max-width:982px) {
+            .delivery {
+                background-size: cover;
+            }
+        }
+        
+        .delivery:hover {
+            background-image: url({% static 'img/img2.jpg' %});
+            width: 100%;
+            min-height: 100vh;
+            /* opacity: 0.7; */
+            background: rgba(rgb(228, 198, 198), rgb(187, 209, 187), rgb(160, 160, 189), 0.5);
+            background-size: cover;
+            background-color: rgb(255, 255, 255);
+        }
+        
+        .delivery:hover .collections {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>
+            <img src="{% static 'img/whoops 3d .png' %}" alt="">
+        </h1>
+        <nav>
+            <span><a href="{% url '#home' %}">HOME</a></span> {% comment %} <a href="{% url '#Hoodies' %}">Hoodies</a> {% endcomment %} {% comment %} <a href="{% url '#delivery' %}">Delivery</a> {% endcomment %}
+            <a href="{% url '#returns' %}">Returns & Exchange</a> {% comment %} <a href="{% url '#contact' %}">Contact</a> {% endcomment %}
+        </nav>
+        <div class="icons">
+            <!-- <a href=""><i class="fa-solid fa-magnifying-glass"></i></a> -->
+            <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+            <li onclick=showSidebar()><i class="fa-solid fa-bars"></i></li>
+            <li class="closesidebar" onclick=hideSidebar()><i class="fa-solid fa-xmark"></i></li>
+        </div>
+    </header>
+
+    <section class="shopping" id="home" style="background-color: white;">
+        <div class="navigation">
+            <ul style='height:6em;'>
+                <li><a href="{% url '#home' %}" style=padding-right:7px> HOME</a> </li>
+                {% comment %}
+                <li><a href="{% url '#Hoodies' %}">Hoodies</a></li> {% endcomment %} {% comment %}
+                <li><a href="{% url '#delivery' %}">Delivery</a></li> {% endcomment %}
+                <li><a href="{% url '#returns' %}">Returns & Exchange</a></li>
+                {% comment %}
+                <li><a href="{% url '#contact' %}">Contact</a></li> {% endcomment %}
+            </ul>
+        </div>
+    </section>
+    <section class="delivery">
+
+        <div class="texts">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form1">
+                    <div class="p-form">
+                        <h3>fill out the form please</h3>
+                    </div>
+                    <label for="FirstName"><h3>First name:</h3></label>
+                    <input type="text" id="fname" name="FirstName" required>
+                    <label for="LastName"><h3>Last name:</h3></label>
+                    <input type="text" id="lname" name="LastName" required>
+                    <label for="PhoneNumber"><h3>Phone number:</h3></label>
+                    <input type="text" id="phone" name="PhoneNumber" required>
+                    <label for="YourAddress" style="    margin: 13px 0 10px 0;"><h3>Your address:</h3></label>
+                    <input type="text" id="address" name="YourAddress" required>
+                    <!-- <input class='submit' type="submit" value="submit" style="width: 20em;
+                color: black;
+                background: #d4d4d4;
+    transition: 0.7s ease;
+                margin-top: 18px; padding-left: 0px; "> -->
+                </div>
+                <div class="cart">
+                    <h2> your cart</h2>
+                    <label for='selectedItems'><h3>selected items :</h3></label>
+                    <input list="browsers" name="items" id="browser" required>
+                    <datalist id="browsers">
+                        {% for x in pro %}
+                            <option value="{{x.description}}:{{x.price}}" > 
+                        {% endfor %}
+                    </datalist>
+                    <input type="number" value="0" id="product-quantity" name="quantity" required >
+                    <input list="sizes" name="size" id="browser" required>
+                    <datalist id="sizes">
+                        <option value="small"></option>
+                        <option value="medium"></option>
+                        <option value="large"></option>
+                        <option value="x-large"></option>
+                    </datalist>
+                    <p style="color: white; font-size: large;">notes :</p>
+                    <input type="text" name="details" placeholder="one small and one x-large">
+                    <input class='submit' type="submit" value="submit" style="width: 20em;
+                    color: black;
+                    background: #d4d4d4;
+        transition: 0.7s ease;
+                    margin-top: 18px; padding-left: 0px; ">
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        function showSidebar() {
+            const navigation = document.querySelector('.navigation')
+            navigation.style.display = 'block'
+            const closesidebar = document.querySelector('.closesidebar')
+            closesidebar.style.display = 'flex'
+        }
+
+        function hideSidebar() {
+            const navigation = document.querySelector('.navigation')
+            navigation.style.display = 'none'
+            const closesidebar = document.querySelector('.closesidebar')
+            closesidebar.style.display = 'none'
+        }
+    </script>
+</body>
+
+</html>

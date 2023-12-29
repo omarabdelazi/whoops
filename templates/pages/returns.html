@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="https://img.freepik.com/free-vector/letter-w-with-blossoms_53876-66550.jpg">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <title>WHOOPS</title>
+    <style>
+        .returns {
+            background-image: url({% static 'img/img1.jpg' %});
+            width: 100%;
+            min-height: 92vh;
+            opacity: 0.7;
+            background: rgba(rgb(228, 198, 198), rgb(187, 209, 187), rgb(160, 160, 189), 0.5);
+            background-size: contain;
+            position: fixed;
+            top: 86px;
+        }
+        
+        @media(max-width:982px) {
+            .returns {
+                background-size: cover;
+            }
+        }
+        
+        .returns:hover {
+            background-image: url({% static 'img/img2.jpg' %});
+            width: 100%;
+            min-height: 100vh;
+            opacity: 0.7;
+            background: rgba(rgb(228, 198, 198), rgb(187, 209, 187), rgb(160, 160, 189), 0.5);
+            background-size: cover;
+        }
+        
+        .returns:hover .collections {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>
+            <img src="{% static 'img/whoops 3d .png' %}" alt="">
+        </h1>
+        <nav>
+            <span><a href="{% url '#home' %}">HOME</a></span>
+            {% comment %} <a href="{% url '#Hoodies' %}">Hoodies</a> {% endcomment %}
+            {% comment %} <a href="{% url '#delivery' %}">Delivery</a> {% endcomment %}
+            <a href="{% url '#returns' %}">Returns & Exchange</a>
+            {% comment %} <a href="{% url '#contact' %}">Contact</a> {% endcomment %}
+        </nav>
+        <div class="icons">
+            <!-- <a href=""><i class="fa-solid fa-magnifying-glass"></i></a> -->
+            <a href="{% url 'cart'%}"><i class="fa-solid fa-cart-shopping"></i></a>
+            <li onclick=showSidebar()><i class="fa-solid fa-bars"></i></li>
+            <li class="closesidebar" onclick=hideSidebar()><i class="fa-solid fa-xmark"></i></li>
+        </div>
+    </header>
+
+    <section class="shopping" id="home" style="background-color: white;">
+        <div class="navigation">
+            <ul style='height:6em;'>
+                <li><a href="{% url '#home' %}" style=padding-right:7px> HOME</a> </li>
+                {% comment %} <li><a href="{% url '#Hoodies' %}">Hoodies</a></li> {% endcomment %}
+                {% comment %} <li><a href="{% url '#delivery' %}">Delivery</a></li> {% endcomment %}
+                <li><a href="{% url '#returns' %}">Returns & Exchange</a></li>
+                {% comment %} <li><a href="{% url '#contact' %}">Contact</a></li> {% endcomment %}
+            </ul>
+        </div>
+    </section>
+    <section class="returns">
+
+        <div class="container">
+            <h1>policy</h1>
+            <div style="display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-wrap: wrap;">
+                <p>no returns but you can exchange your items for just 3 days </p>
+                <p>welcome to WHOOPS</p>
+                <img src="{% static 'img/IMG_6521.PNG' %}" alt="">
+
+            </div>
+        </div>
+
+    </section>
+    <script>
+        function showSidebar() {
+            const navigation = document.querySelector('.navigation')
+            navigation.style.display = 'block'
+            const closesidebar = document.querySelector('.closesidebar')
+            closesidebar.style.display = 'flex'
+        }
+
+        function hideSidebar() {
+            const navigation = document.querySelector('.navigation')
+            navigation.style.display = 'none'
+            const closesidebar = document.querySelector('.closesidebar')
+            closesidebar.style.display = 'none'
+        }
+    </script>
+</body>
+
+</html>
